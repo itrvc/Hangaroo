@@ -6,11 +6,13 @@ public class Word {
 
     private final Random random;
     private final String word;
+    private final String[] wordArray;
 
     public Word(String word) {
 
         this.random = new Random();
         this.word = word.toLowerCase();
+        this.wordArray = this.word.split("");
     }
 
     public String getWord() {
@@ -19,13 +21,12 @@ public class Word {
 
     public String getFormattedWord() {
 
-        int wordLength = this.word.length();
+        int wordLength = getWord().length();
         int wordMaxUnknownLetters = (wordLength <= 5) ? 3 : 5;
         int wordCounter = 0;
         int[] wordRandomLettersIndex = new int[wordMaxUnknownLetters];
 
-        String[] wordArray = this.word.split("");
-        String wordTemporary = this.word;
+        String wordTemporary = getWord();
         String wordFormatted = "";
 
         while (wordCounter != wordMaxUnknownLetters) {
