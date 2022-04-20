@@ -32,7 +32,7 @@ public class Hangaroo {
 
     public void startGame() {
         Scanner input = new Scanner(System.in);
-        String randomWord = words.get(6);
+        String randomWord = words.get(random.nextInt(words.size()));
         String formattedWord = formatWord(randomWord);
         String userGuess;
 
@@ -45,7 +45,7 @@ public class Hangaroo {
                 .toUpperCase());
 
         while (tryCounter != maxTries) {
-            System.out.print("\nEnter a letter to complete the word:");
+            System.out.print("\nEnter a letter to complete the word: ");
             userGuess = input.nextLine().toLowerCase();
 
             if (randomWord.contains(userGuess)) {
@@ -62,8 +62,7 @@ public class Hangaroo {
 
                 tryCounter += 1;
             } else {
-                System.out.printf("The letter %s is not in the word. Try again", userGuess);
-                tryCounter = (tryCounter <= 0) ? 0 : tryCounter - 1;
+                System.out.printf("The letter %s is not in the word. Try again\n", userGuess);
             }
 
         }
