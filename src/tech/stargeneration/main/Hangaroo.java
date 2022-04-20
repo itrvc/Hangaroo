@@ -36,7 +36,7 @@ public class Hangaroo {
         String formattedWord = formatWord(randomWord);
         String userGuess;
 
-        int maxTries = 3;
+        int maxTries = (randomWord.length() <= 5) ? 2 : 3;
         int tryCounter = 0;
 
         System.out.println("Word to guess: "
@@ -67,8 +67,8 @@ public class Hangaroo {
 
         }
 
-        System.out.println("\nYou have already tried to guess the word in 3 attempts.");
-        System.out.print("Guess the word now: ");
+        System.out.printf("\nYou have already tried to guess the word in %d attempts.", maxTries);
+        System.out.print("\nGuess the word now: ");
         userGuess = input.nextLine();
 
         String message = (randomWord.equals(userGuess))
