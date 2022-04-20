@@ -68,13 +68,13 @@ public class Hangaroo {
 
         }
 
-        System.out.println("You have already tried to guess the word in 3 attempts.");
+        System.out.println("\nYou have already tried to guess the word in 3 attempts.");
         System.out.print("Guess the word now: ");
         userGuess = input.nextLine();
 
         String message = (randomWord.equals(userGuess))
-                ? "Congratulations! You guessed the word."
-                : "Better luck next time! The word was %s".formatted(randomWord);
+                ? "\nCongratulations! You guessed the word."
+                : "\nBetter luck next time! The word was %s".formatted(randomWord);
 
         System.out.println(message);
     }
@@ -104,7 +104,7 @@ public class Hangaroo {
             }
         }
 
-        return word;
+        return word.replace("_", "?");
     }
 
     private String deconstructFormattedWord(
