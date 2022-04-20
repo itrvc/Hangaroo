@@ -10,7 +10,11 @@ public class Word {
     public Word(String word) {
 
         this.random = new Random();
-        this.word = word;
+        this.word = word.toLowerCase();
+    }
+
+    public String getWord() {
+        return this.word;
     }
 
     public String getFormattedWord() {
