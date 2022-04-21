@@ -16,7 +16,8 @@ public class Hangaroo {
         random = new Random();
 
         try {
-            file = new File("C:\\Users\\itrvc\\IdeaProjects\\Hangaroo\\res\\words.txt");
+            file = new File(".\\res\\words.txt");
+
             Scanner scanner = new Scanner(file);
 
             while (scanner.hasNextLine()) {
