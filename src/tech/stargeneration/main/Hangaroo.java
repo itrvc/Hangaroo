@@ -10,6 +10,7 @@ public class Hangaroo {
     private File file;
     private final ArrayList<String> words;
     private final Random random;
+    private String word;
 
     public Hangaroo() {
         words = new ArrayList<>();
@@ -29,6 +30,8 @@ public class Hangaroo {
         } catch (FileNotFoundException e) {
             System.out.printf("File %s does not exist.", file.getName());
         }
+
+        word = words.get(random.nextInt(words.size() - 1));
     }
 
     public void startGame() {
@@ -79,7 +82,12 @@ public class Hangaroo {
         System.out.println(message);
     }
 
-    private String formatWord(String word) {
+    public String getWord() {
+
+        return this.word;
+    }
+
+    public String formatWord(String word) {
         int wordLength = word.length();
         int maxCoveredLetters = (wordLength <= 5) ? 4 : 6;
         int counter = 0;
@@ -107,7 +115,7 @@ public class Hangaroo {
         return word.replace("_", "?");
     }
 
-    private String deconstructFormattedWord(
+    public String deconstructFormattedWord(
             String word,
             String formattedWord,
             String charUserGuess) {
