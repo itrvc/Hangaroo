@@ -4,6 +4,8 @@ import tech.stargeneration.main.Hangaroo;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Screen extends JPanel {
 
@@ -15,6 +17,7 @@ public class Screen extends JPanel {
     private Hangaroo hangaroo;
     private String word;
     private String formattedWord;
+    private int maxAttempts;
 
     public Screen() {
 
@@ -40,15 +43,17 @@ public class Screen extends JPanel {
         submitGuess = new JButton();
         hangaroo = new Hangaroo();
 
-        word = hangaroo.getWord().toUpperCase();
-        formattedWord = hangaroo.formatWord(word);
+        word = hangaroo.getWord();
+        formattedWord = hangaroo.formatWord(word.toUpperCase());
+
+        maxAttempts = hangaroo.getMaxTries();
 
         formattedWordLabel.setText(formattedWord);
         formattedWordLabel.setHorizontalAlignment(SwingConstants.CENTER);
         formattedWordLabel.setBounds(0, 120, 500, 30);
         formattedWordLabel.setFont(new Font("Jetbrains Mono", Font.BOLD, 40));
 
-        maxTries.setText("Attempts: %s".formatted(String.valueOf(hangaroo.getMaxTries())));
+        maxTries.setText("Attempts: %s".formatted(String.valueOf(maxAttempts)));
         maxTries.setBounds(0, 0, 300, 30);
         maxTries.setFont(new Font("Jetbrains Mono", Font.PLAIN, 15));
 
@@ -66,6 +71,16 @@ public class Screen extends JPanel {
         submitGuess.setHorizontalAlignment(SwingConstants.CENTER);
         submitGuess.setBounds(125, 300, 250, 30);
         submitGuess.setFont(new Font("Jetbrains Mono", Font.BOLD, 20));
+
+        submitGuess.addActionListener(e -> {
+            String userGuess = inputGuess.getText().toLowerCase();
+
+            if (maxAttempts != 0) {
+                checkCharacterGuess(userGuess);
+            } else {
+                checkWordGuess(userGuess);
+            }
+        });
     }
 
     private void addComponents() {
@@ -75,5 +90,54 @@ public class Screen extends JPanel {
         add(wordToGuess);
         add(inputGuess);
         add(submitGuess);
+    }
+
+    private void checkCharacterGuess(String userGuess) {
+
+        if (maxAttempts == 1) {
+            showMessage("You already tried to guess the word in 3 attempts. Guess the word now");
+            wordToGuess.setText("Guess the word now");
+            maxTries.setText("Attempts: 0");
+            maxAttempts -= 1;
+        } else {
+            if (word.contains(userGuess)) {
+                formattedWord = hangaroo.deconstructFormattedWord(
+                        word,
+                        formattedWord,
+                        userGuess
+                );
+
+                formattedWordLabel.setText(formattedWord);
+
+                maxAttempts -= 1;
+                maxTries.setText("Attempts: %s".formatted(String.valueOf(maxAttempts)));
+            } else {
+                showMessage("Letter is not in the word.");
+            }
+        }
+    }
+
+    private void checkWordGuess(String userGuess) {
+        if (inputGuess
+                .getText()
+                .toLowerCase()
+                .equals(word)) {
+            showMessage("Congrats!");
+        } else {
+            showMessage("Bummer! Try again!");
+        }
+
+        wordToGuess.setText("The word was");
+        formattedWordLabel.setText(word.toUpperCase());
+    }
+
+    private void showMessage(String messageToDisplay) {
+
+        JOptionPane.showMessageDialog(
+                null,
+                messageToDisplay,
+                "Message",
+                JOptionPane.INFORMATION_MESSAGE
+        );
     }
 }

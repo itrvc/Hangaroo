@@ -36,6 +36,7 @@ public class Hangaroo {
         maxTries = 3;
     }
 
+    // Use start game if you want to play in the CLI.
     public void startGame() {
         Scanner input = new Scanner(System.in);
         String randomWord = words.get(random.nextInt(words.size()));
@@ -119,7 +120,7 @@ public class Hangaroo {
         int charIndex = word.indexOf(charUserGuess);
         formattedWord =
                 formattedWord.substring(0, charIndex)
-                        + charUserGuess
+                        + charUserGuess.toUpperCase()
                         + formattedWord.substring(charIndex + 1);
 
         return formattedWord;
