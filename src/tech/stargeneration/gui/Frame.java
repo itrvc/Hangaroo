@@ -17,6 +17,9 @@ public class Frame extends JFrame {
         add(screen);
 
         pack();
+    }
+
+    public void showFrame() {
         setVisible(true);
     }
 }

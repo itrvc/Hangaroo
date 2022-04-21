@@ -1,13 +1,12 @@
 package tech.stargeneration.main;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Hangaroo {
-    private File file;
+
     private final ArrayList<String> words;
     private final Random random;
     private String word;
@@ -17,22 +16,53 @@ public class Hangaroo {
         words = new ArrayList<>();
         random = new Random();
 
-        try {
-            file = new File(".\\res\\words.txt");
+//        try {
+//            file = new File(".\\res\\words.txt");
+//
+//            Scanner scanner = new Scanner(file);
+//
+//            while (scanner.hasNextLine()) {
+//                String word = scanner.nextLine();
+//                words.add(word);
+//            }
+//
+//            scanner.close();
+//        } catch (FileNotFoundException e) {
+//            System.out.printf("File %s does not exist.", file.getName());
+//        }
 
-            Scanner scanner = new Scanner(file);
+        words.add("bling");
+        words.add("jumpy");
+        words.add("abductions");
+        words.add("uncopyrightable");
+        words.add("abortively");
+        words.add("freshly");
+        words.add("jackbox");
+        words.add("dumbing");
+        words.add("blacksmith");
+        words.add("gunpowdery");
+        words.add("excellence");
+        words.add("typing");
+        words.add("sharing");
+        words.add("pancake");
+        words.add("express");
+        words.add("music");
+        words.add("idiom");
+        words.add("khentray");
+        words.add("command");
+        words.add("aesthetic");
+        words.add("welcome");
+        words.add("voices");
+        words.add("havoc");
+        words.add("delicacy");
+        words.add("extravagant");
+        words.add("glamour");
+        words.add("vigorous");
+        words.add("hammock");
+        words.add("replenish");
 
-            while (scanner.hasNextLine()) {
-                String word = scanner.nextLine();
-                words.add(word);
-            }
-
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            System.out.printf("File %s does not exist.", file.getName());
-        }
-
-        word = words.get(random.nextInt(words.size() - 1));
+        int randomWord = random.nextInt(words.size());
+        word = words.get(random.nextInt(randomWord));
         maxTries = 3;
     }
 
