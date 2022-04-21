@@ -37,7 +37,7 @@ public class Hangaroo {
         String formattedWord = formatWord(randomWord);
         String userGuess;
 
-        int maxTries = (randomWord.length() <= 5) ? 2 : 3;
+        int maxTries = 3;
         int tryCounter = 0;
 
         System.out.println("Word to guess: "
@@ -81,7 +81,7 @@ public class Hangaroo {
 
     private String formatWord(String word) {
         int wordLength = word.length();
-        int maxCoveredLetters = (wordLength <= 5) ? 3 : 5;
+        int maxCoveredLetters = (wordLength <= 5) ? 4 : 6;
         int counter = 0;
 
         int[] randomLetters = new int[maxCoveredLetters];
