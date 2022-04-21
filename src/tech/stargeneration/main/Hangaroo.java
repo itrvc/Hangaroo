@@ -11,6 +11,7 @@ public class Hangaroo {
     private final ArrayList<String> words;
     private final Random random;
     private String word;
+    private int maxTries;
 
     public Hangaroo() {
         words = new ArrayList<>();
@@ -32,6 +33,7 @@ public class Hangaroo {
         }
 
         word = words.get(random.nextInt(words.size() - 1));
+        maxTries = 3;
     }
 
     public void startGame() {
@@ -40,7 +42,6 @@ public class Hangaroo {
         String formattedWord = formatWord(randomWord);
         String userGuess;
 
-        int maxTries = 3;
         int tryCounter = 0;
 
         System.out.println("Word to guess: "
@@ -80,11 +81,6 @@ public class Hangaroo {
                 : "\nBetter luck next time! The word was %s".formatted(randomWord);
 
         System.out.println(message);
-    }
-
-    public String getWord() {
-
-        return this.word;
     }
 
     public String formatWord(String word) {
@@ -127,5 +123,14 @@ public class Hangaroo {
                         + formattedWord.substring(charIndex + 1);
 
         return formattedWord;
+    }
+
+    public String getWord() {
+
+        return this.word;
+    }
+
+    public int getMaxTries() {
+        return this.maxTries;
     }
 }
