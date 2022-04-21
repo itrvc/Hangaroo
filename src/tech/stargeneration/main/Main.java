@@ -1,9 +1,10 @@
 package tech.stargeneration.main;
 
+import tech.stargeneration.gui.Frame;
+
 public class Main {
 
     public static void main(String[] args) {
-        Hangaroo hangaroo = new Hangaroo();
-        hangaroo.startGame();
+        Frame frame = new Frame();
     }
 }
