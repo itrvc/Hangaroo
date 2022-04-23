@@ -4,8 +4,6 @@ import tech.stargeneration.main.Hangaroo;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Screen extends JPanel {
 
@@ -93,6 +91,7 @@ public class Screen extends JPanel {
     }
 
     private void checkCharacterGuess(String userGuess) {
+        String charGuess = userGuess.substring(0,1);
 
         if (maxAttempts == 1) {
             showMessage("You already tried to guess the word in 3 attempts. Guess the word now");
@@ -101,17 +100,21 @@ public class Screen extends JPanel {
             formattedWord = hangaroo.deconstructFormattedWord(
                     word,
                     formattedWord,
-                    userGuess
+                    charGuess
             );
 
             formattedWordLabel.setText(formattedWord);
             maxAttempts -= 1;
         } else {
-            if (word.contains(userGuess)) {
+            if (word.contains(charGuess)) {
+                if (inputGuess.getText().length() > 1) {
+                    showMessage("You can only guess letters in the first 3 attempts!");
+                }
+
                 formattedWord = hangaroo.deconstructFormattedWord(
                         word,
                         formattedWord,
-                        userGuess
+                        charGuess
                 );
 
                 formattedWordLabel.setText(formattedWord);
