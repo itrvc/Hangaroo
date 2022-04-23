@@ -98,6 +98,13 @@ public class Screen extends JPanel {
             showMessage("You already tried to guess the word in 3 attempts. Guess the word now");
             wordToGuess.setText("Guess the word now");
             maxTries.setText("Attempts: 0");
+            formattedWord = hangaroo.deconstructFormattedWord(
+                    word,
+                    formattedWord,
+                    userGuess
+            );
+
+            formattedWordLabel.setText(formattedWord);
             maxAttempts -= 1;
         } else {
             if (word.contains(userGuess)) {
