@@ -106,24 +106,26 @@ public class Screen extends JPanel {
             formattedWordLabel.setText(formattedWord);
             maxAttempts -= 1;
         } else {
-            if (word.contains(charGuess)) {
-                if (inputGuess.getText().length() > 1) {
-                    showMessage("You can only guess letters in the first 3 attempts!");
-                }
-
-                formattedWord = hangaroo.deconstructFormattedWord(
-                        word,
-                        formattedWord,
-                        charGuess
-                );
-
-                formattedWordLabel.setText(formattedWord);
-
-                maxAttempts -= 1;
-                maxTries.setText("Attempts: %s".formatted(String.valueOf(maxAttempts)));
+            if (inputGuess.getText().length() > 1) {
+                showMessage("You can only guess letters in the first 3 attempts!");
             } else {
-                showMessage("Letter %s is not in the word."
-                        .formatted(charGuess));
+                if (word.contains(charGuess)) {
+
+
+                    formattedWord = hangaroo.deconstructFormattedWord(
+                            word,
+                            formattedWord,
+                            charGuess
+                    );
+
+                    formattedWordLabel.setText(formattedWord);
+
+                    maxAttempts -= 1;
+                    maxTries.setText("Attempts: %s".formatted(String.valueOf(maxAttempts)));
+                } else {
+                    showMessage("Letter %s is not in the word."
+                            .formatted(charGuess));
+                }
             }
         }
     }
