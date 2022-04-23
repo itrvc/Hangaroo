@@ -12,7 +12,6 @@ public class Hangaroo {
     private final Random random;
     private final ArrayList<String> words;
     private final int maxTries;
-    private final String word;
 
 
     public Hangaroo() {
@@ -34,9 +33,9 @@ public class Hangaroo {
             System.out.printf("File %s does not exi st.", file.getName());
         }
 
-        word = words.get(random.nextInt(words.size() - 1));
         maxTries = 3;
     }
+
     public void startGame() {
         Scanner input = new Scanner(System.in);
         String randomWord = words.get(random.nextInt(words.size()));
@@ -54,21 +53,26 @@ public class Hangaroo {
             System.out.print("\nEnter a letter to complete the word: ");
             userGuess = input.nextLine().toLowerCase();
 
-            if (randomWord.contains(userGuess)) {
-                formattedWord = deconstructFormattedWord(
-                        randomWord,
-                        formattedWord,
-                        userGuess
-                );
-
-                System.out.println("Word to guess: "
-                        + formattedWord
-                        .replace("", " ")
-                        .toUpperCase());
-
-                tryCounter += 1;
+            if (userGuess.length() > 1) {
+                System.out.println("You can only guess letters in the first 3 attempts.");
             } else {
-                System.out.printf("The letter %s is not in the word. Try again\n", userGuess);
+                userGuess = userGuess.substring(0, 1);
+                if (randomWord.contains(userGuess)) {
+                    formattedWord = deconstructFormattedWord(
+                            randomWord,
+                            formattedWord,
+                            userGuess
+                    );
+
+                    System.out.println("Word to guess: "
+                            + formattedWord
+                            .replace("", " ")
+                            .toUpperCase());
+
+                    tryCounter += 1;
+                } else{
+                    System.out.printf("The letter %s is not in the word. Try again\n", userGuess);
+                }
             }
 
         }
