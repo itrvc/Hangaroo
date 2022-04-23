@@ -76,7 +76,7 @@ public class Screen extends JPanel {
             if (maxAttempts != 0) {
                 checkCharacterGuess(userGuess);
             } else {
-                checkWordGuess(userGuess);
+                checkWordGuess();
             }
         });
     }
@@ -127,7 +127,7 @@ public class Screen extends JPanel {
         }
     }
 
-    private void checkWordGuess(String userGuess) {
+    private void checkWordGuess() {
         if (inputGuess
                 .getText()
                 .toLowerCase()
