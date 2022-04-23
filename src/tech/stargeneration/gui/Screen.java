@@ -91,7 +91,7 @@ public class Screen extends JPanel {
     }
 
     private void checkCharacterGuess(String userGuess) {
-        String charGuess = userGuess.substring(0,1);
+        String charGuess = userGuess.substring(0, 1);
 
         if (maxAttempts == 1) {
             showMessage("You already tried to guess the word in 3 attempts. Guess the word now");
@@ -122,7 +122,8 @@ public class Screen extends JPanel {
                 maxAttempts -= 1;
                 maxTries.setText("Attempts: %s".formatted(String.valueOf(maxAttempts)));
             } else {
-                showMessage("Letter is not in the word.");
+                showMessage("Letter %s is not in the word."
+                        .formatted(charGuess));
             }
         }
     }
