@@ -1,51 +1,87 @@
 package tech.stargeneration.main;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Hangaroo {
 
+    private File file;
     private final Random random;
-    private final String word;
+    private final ArrayList<String> words;
     private final int maxTries;
+    private final String word;
+
 
     public Hangaroo() {
-        ArrayList<String> words = new ArrayList<>();
+        words = new ArrayList<>();
         random = new Random();
 
-        words.add("bling");
-        words.add("jumpy");
-        words.add("abductions");
-        words.add("uncopyrightable");
-        words.add("abortively");
-        words.add("freshly");
-        words.add("jackbox");
-        words.add("dumbing");
-        words.add("blacksmith");
-        words.add("gunpowdery");
-        words.add("excellence");
-        words.add("typing");
-        words.add("sharing");
-        words.add("pancake");
-        words.add("express");
-        words.add("music");
-        words.add("idiom");
-        words.add("khentray");
-        words.add("command");
-        words.add("aesthetic");
-        words.add("welcome");
-        words.add("voices");
-        words.add("havoc");
-        words.add("delicacy");
-        words.add("extravagant");
-        words.add("glamour");
-        words.add("vigorous");
-        words.add("hammock");
-        words.add("replenish");
+        try {
+            file = new File(".\\res\\words.txt");
 
-        int randomWord = random.nextInt(words.size());
-        word = words.get(random.nextInt(randomWord));
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNextLine()) {
+                String word = scanner.nextLine();
+                words.add(word);
+            }
+
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.printf("File %s does not exi st.", file.getName());
+        }
+
+        word = words.get(random.nextInt(words.size() - 1));
         maxTries = 3;
+    }
+    public void startGame() {
+        Scanner input = new Scanner(System.in);
+        String randomWord = words.get(random.nextInt(words.size()));
+        String formattedWord = formatWord(randomWord);
+        String userGuess;
+
+        int tryCounter = 0;
+
+        System.out.println("Word to guess: "
+                + formattedWord
+                .replace("", " ")
+                .toUpperCase());
+
+        while (tryCounter != maxTries) {
+            System.out.print("\nEnter a letter to complete the word: ");
+            userGuess = input.nextLine().toLowerCase();
+
+            if (randomWord.contains(userGuess)) {
+                formattedWord = deconstructFormattedWord(
+                        randomWord,
+                        formattedWord,
+                        userGuess
+                );
+
+                System.out.println("Word to guess: "
+                        + formattedWord
+                        .replace("", " ")
+                        .toUpperCase());
+
+                tryCounter += 1;
+            } else {
+                System.out.printf("The letter %s is not in the word. Try again\n", userGuess);
+            }
+
+        }
+
+        System.out.printf("\nYou have already tried to guess the word in %d attempts.", maxTries);
+        System.out.print("\nGuess the word now: ");
+        userGuess = input.nextLine();
+
+        String message = (randomWord.equals(userGuess))
+                ? "\nCongratulations! You guessed the word."
+                : "\nBetter luck next time! The word was %s".formatted(randomWord);
+
+        System.out.println(message);
     }
 
     public String formatWord(String word) {
@@ -88,14 +124,5 @@ public class Hangaroo {
                         + formattedWord.substring(charIndex + 1);
 
         return formattedWord;
-    }
-
-    public String getWord() {
-
-        return this.word;
-    }
-
-    public int getMaxTries() {
-        return this.maxTries;
     }
 }
