@@ -70,7 +70,7 @@ public class Hangaroo {
                             .toUpperCase());
 
                     tryCounter += 1;
-                } else{
+                } else {
                     System.out.printf("The letter %s is not in the word. Try again\n", userGuess);
                 }
             }
@@ -83,7 +83,7 @@ public class Hangaroo {
 
         String message = (randomWord.equals(userGuess))
                 ? "\nCongratulations! You guessed the word."
-                : "\nBetter luck next time! The word was %s".formatted(randomWord);
+                : "\nBetter luck next time! The word was %s".formatted(randomWord.toUpperCase());
 
         System.out.println(message);
     }
