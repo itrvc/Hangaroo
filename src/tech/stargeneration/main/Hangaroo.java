@@ -71,7 +71,9 @@ public class Hangaroo {
 
                     tryCounter += 1;
                 } else {
-                    System.out.printf("The letter %s is not in the word. Try again\n", userGuess);
+                    System.out.printf(
+                            "The letter %s is not in the word. Try again\n",
+                            userGuess.toUpperCase());
                 }
             }
 
