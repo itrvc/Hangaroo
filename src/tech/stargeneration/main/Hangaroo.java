@@ -44,7 +44,7 @@ public class Hangaroo {
 
         int tryCounter = 0;
 
-        System.out.println("Word to guess: "
+        System.out.println("Word to guess:"
                 + formattedWord
                 .replace("", " ")
                 .toUpperCase());
@@ -64,7 +64,7 @@ public class Hangaroo {
                             userGuess
                     );
 
-                    System.out.println("Word to guess: "
+                    System.out.println("Word to guess:"
                             + formattedWord
                             .replace("", " ")
                             .toUpperCase());
